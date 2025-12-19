@@ -823,10 +823,9 @@ Result list: [1, 4].
 **Function signature**:
 ```python
 def isPalindrome(s):
-    # Write your code here
+    # Check if string matches its reverse
+    return 1 if s == s[::-1] else 0
 ```
-
-**Answer**: N/A (Coding Task)
 
 ---
 
@@ -836,11 +835,23 @@ def isPalindrome(s):
 
 **Function signature**:
 ```python
-def averageExcludingExtremes(N, A):
-    # Write your code here
-```
+import math
 
-**Answer**: N/A (Coding Task)
+def averageExcludingExtremes(N, A):
+    if N == 0:
+        return 0
+        
+    min_val = min(A)
+    max_val = max(A)
+    
+    filtered_A = [x for x in A if x != min_val and x != max_val]
+    
+    if not filtered_A:
+        return 0
+        
+    avg = sum(filtered_A) / len(filtered_A)
+    return math.floor(avg)
+```
 
 ---
 
@@ -852,10 +863,18 @@ def averageExcludingExtremes(N, A):
 **Function signature**:
 ```python
 def fibonacciProduct(A, B):
-    # Write your code here
+    if B < 0: return 0
+    
+    fibs = [0, 1]
+    while len(fibs) <= B:
+        fibs.append(fibs[-1] + fibs[-2])
+    
+    product = 1
+    for i in range(A, B + 1):
+        product *= fibs[i]
+        
+    return product
 ```
-
-**Answer**: N/A (Coding Task)
 
 ---
 
@@ -866,10 +885,11 @@ def fibonacciProduct(A, B):
 **Function signature**:
 ```python
 def maxDifference(N, A):
-    # Write your code here
+    unique_A = sorted(list(set(A)), reverse=True)
+    if len(unique_A) < 2:
+        return 0
+    return unique_A[0] - unique_A[1]
 ```
-
-**Answer**: N/A (Coding Task)
 
 ---
 
@@ -885,10 +905,9 @@ Your task is to find the value of Z.
 **Function signature**:
 ```python
 def findProduct(X, Y):
-    # Write your code here
+    # Z = (X^2 - Y^2) / 4
+    return (X**2 - Y**2) // 4
 ```
-
-**Answer**: N/A (Coding Task)
 
 ---
 
@@ -934,8 +953,12 @@ Table `STUDENTS`:
 - `MARKS` (int)
 - `CITY` (varchar)
 
-**Answer**: N/A (SQL Coding Task)
-`SELECT CITY FROM STUDENTS GROUP BY CITY HAVING COUNT(STUDENT_ID) > 5;`
+```sql
+SELECT CITY 
+FROM STUDENTS 
+GROUP BY CITY 
+HAVING COUNT(STUDENT_ID) > 5;
+```
 
 ---
 
@@ -952,7 +975,10 @@ Table `PRODUCT`:
 - `PROD_PRICE` (int): price of the product
 - `SALES_ID` (int): salesman id
 
-**Answer**: N/A (SQL Coding Task)
-`SELECT YEAR(MANU_DATE), MIN(PROD_PRICE) FROM PRODUCT GROUP BY YEAR(MANU_DATE);`
+```sql
+SELECT YEAR(MANU_DATE), MIN(PROD_PRICE) 
+FROM PRODUCT 
+GROUP BY YEAR(MANU_DATE);
+```
 
 ---
