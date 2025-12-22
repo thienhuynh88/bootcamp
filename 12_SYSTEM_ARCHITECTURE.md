@@ -24,7 +24,8 @@ graph TB
         Core["Core/Master Data Service"]
         Patient["Patient Service"]
         Clinical["Clinical Service"]
-        Para["Paraclinical Service (LIS/PACS)"]
+        LIS["LIS Service (Lab)"]
+        PACS["PACS Service (Imaging)"]
         Pharma["Pharmacy Service"]
         Billing["Billing/Finance Service"]
         Report["Report Service"]
@@ -40,6 +41,7 @@ graph TB
         Ext_HIS["External HIS/National DB"]
         Payment["Payment Gateway (VNPay/MoMo)"]
         Hardware["Hardware (Printers, Barcode)"]
+        Machines["Medical Machines (Analyzers/Modality)"]
     end
 
     ClientLayer --> LB
@@ -48,7 +50,8 @@ graph TB
     API_GW --> Core
     API_GW --> Patient
     API_GW --> Clinical
-    API_GW --> Para
+    API_GW --> LIS
+    API_GW --> PACS
     API_GW --> Pharma
     API_GW --> Billing
     API_GW --> Report
@@ -58,7 +61,8 @@ graph TB
     ServiceLayer --> MinIO
 
     Billing --> Payment
-    Para --> Hardware
+    LIS --> Machines
+    PACS --> Machines
     Core --> Ext_HIS
 ```
 
@@ -88,10 +92,11 @@ Hệ thống được chia nhỏ thành các Service chuyên biệt (Domain-Driv
 2.  **Core Service:** Quản lý Danh mục dùng chung (ICD-10, Hành chính, Phòng ban), Cấu hình hệ thống.
 3.  **Patient Service:** Quản lý hồ sơ bệnh nhân (MPI), Lịch sử khám.
 4.  **Clinical Service:** Tiếp nhận, Khám bệnh, Kê đơn, Chỉ định CLS, Hồ sơ bệnh án điện tử (EMR).
-5.  **Paraclinical Service:** Kết nối máy xét nghiệm (LIS), Chẩn đoán hình ảnh (PACS), Quản lý kết quả.
-6.  **Pharmacy Service:** Quản lý Kho dược, Xuất/Nhập tồn, Cấp phát thuốc.
-7.  **Billing Service:** Quản lý Bảng giá, Tính tiền, BHYT, Thu ngân, Hóa đơn điện tử.
-8.  **Report Service:** Job tổng hợp dữ liệu (ETL), Xuất báo cáo động, Dashboard.
+5.  **LIS Service (Laboratory):** Kết nối máy xét nghiệm (ASTM/HL7), Quản lý quy trình và trả kết quả xét nghiệm.
+6.  **PACS Service (Imaging):** Kết nối máy CĐHA (DICOM), Lưu trữ và xử lý hình ảnh (X-Quang, Siêu âm, MRI).
+7.  **Pharmacy Service:** Quản lý Kho dược, Xuất/Nhập tồn, Cấp phát thuốc.
+8.  **Billing Service:** Quản lý Bảng giá, Tính tiền, BHYT, Thu ngân, Hóa đơn điện tử.
+9.  **Report Service:** Job tổng hợp dữ liệu (ETL), Xuất báo cáo động, Dashboard.
 
 ### 2.4. Data Layer (Cơ sở dữ liệu)
 *   **Database:** PostgreSQL (Khuyến nghị cho dữ liệu y tế cần độ tin cậy cao, ACID transaction).
