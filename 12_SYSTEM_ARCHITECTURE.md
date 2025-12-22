@@ -9,37 +9,37 @@ Mô hình kiến trúc tổng thể của NextGen DHP được xây dựng theo 
 ```mermaid
 graph TB
     subgraph ClientLayer [Client Layer]
-        Web[Web App (React/Vite)]
-        Mobile[Mobile App (Flutter/Pro)]
-        Kiosk[Kiosk/Queue Display]
+        Web["Web App (React/Vite)"]
+        Mobile["Mobile App (Flutter/Pro)"]
+        Kiosk["Kiosk/Queue Display"]
     end
 
     subgraph APIGatewayLayer [API Gateway Layer]
-        LB[Load Balancer (Nginx/Traefik)]
-        API_GW[API Gateway (Kong/Ocelot)]
+        LB["Load Balancer (Nginx/Traefik)"]
+        API_GW["API Gateway (Kong/Ocelot)"]
     end
 
     subgraph ServiceLayer [Microservices Layer]
-        Auth[Auth Service]
-        Core[Core/Master Data Service]
-        Patient[Patient Service]
-        Clinical[Clinical Service]
-        Para[Paraclinical Service (LIS/PACS)]
-        Pharma[Pharmacy Service]
-        Billing[Billing/Finance Service]
-        Report[Report Service]
+        Auth["Auth Service"]
+        Core["Core/Master Data Service"]
+        Patient["Patient Service"]
+        Clinical["Clinical Service"]
+        Para["Paraclinical Service (LIS/PACS)"]
+        Pharma["Pharmacy Service"]
+        Billing["Billing/Finance Service"]
+        Report["Report Service"]
     end
 
     subgraph DataLayer [Data Persistence Layer]
-        Redis[Redis Cache]
-        Postgres[(PostgreSQL Cluster)]
-        MinIO[(MinIO Object Storage)]
+        Redis["Redis Cache"]
+        Postgres[("PostgreSQL Cluster")]
+        MinIO[("MinIO Object Storage")]
     end
 
     subgraph IntegrationLayer [Integration Layer]
-        Ext_HIS[External HIS/National DB]
-        Payment[Payment Gateway (VNPay/MoMo)]
-        Hardware[Hardware (Printers, Barcode)]
+        Ext_HIS["External HIS/National DB"]
+        Payment["Payment Gateway (VNPay/MoMo)"]
+        Hardware["Hardware (Printers, Barcode)"]
     end
 
     ClientLayer --> LB
